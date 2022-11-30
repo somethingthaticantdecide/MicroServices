@@ -1,0 +1,49 @@
+version: "3.8"
+services:
+  eureka-server:
+    build: ./eureka-server/
+    container_name: eureka-server
+    restart: always
+    ports:
+      - "8761:8761"
+    networks:
+      - micro-network
+  countries-application:
+    build: ./CountriesApplication/
+    depends_on:
+      - eureka-server
+    container_name: countries-application
+    restart: always
+    networks:
+      - micro-network
+  covid-application:
+    build: ./CovidApplication/
+    depends_on:
+      - eureka-server
+    container_name: covid-application
+    restart: always
+    networks:
+      - micro-network
+  aggregator-application:
+    build: ./AggregatorApplication/
+    depends_on:
+      - countries-application
+      - covid-application
+      - eureka-server
+    container_name: aggregator-application
+    restart: always
+    networks:
+      - micro-network
+  apigateway:
+    build: ./ApiGatewayApplication/
+    depends_on:
+      - aggregator-application
+    container_name: api-gateway
+    restart: always
+    ports:
+      - "80:80"
+    networks:
+      - micro-network
+networks:
+  micro-network:
+    driver: bridge
