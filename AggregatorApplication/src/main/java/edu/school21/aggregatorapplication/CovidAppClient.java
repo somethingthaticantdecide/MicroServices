@@ -19,11 +19,11 @@ public class CovidAppClient {
 
     public ResponseEntity<String> getAll() {
         LOGGER.debug("Sending request for all countries");
-        return restTemplate.getForEntity("http://covid-management/covid-management/countries/all", String.class);
+        return restTemplate.getForEntity("http://covid-management/covid-management/countries", String.class);
     }
 
     public ResponseEntity<String> getCountryData(@PathVariable String name) {
         LOGGER.debug("Sending request for country name: {}", name);
-        return restTemplate.getForEntity("http://covid-management/covid-management/countries/name/" + name, String.class);
+        return restTemplate.getForEntity("http://covid-management/covid-management/countries/" + name, String.class);
     }
 }

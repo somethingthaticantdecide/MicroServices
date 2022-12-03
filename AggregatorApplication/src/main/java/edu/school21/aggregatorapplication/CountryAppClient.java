@@ -19,11 +19,11 @@ public class CountryAppClient {
 
     public ResponseEntity<String> getAll() {
         LOGGER.debug("Sending request for all countries");
-        return restTemplate.getForEntity("http://countries-management/countries-management/countries/all", String.class);
+        return restTemplate.getForEntity("http://countries-management/countries-management/countries", String.class);
     }
 
     public ResponseEntity<String> getCountryData(@PathVariable String name) {
         LOGGER.debug("Sending request for country name: {}", name);
-        return restTemplate.getForEntity("http://countries-management/countries-management/countries/name/" + name, String.class);
+        return restTemplate.getForEntity("http://countries-management/countries-management/countries/" + name, String.class);
     }
 }

@@ -17,7 +17,7 @@ public class CountryController {
     public static final String ALL = "/all";
     private final RestTemplate restTemplate = new RestTemplate();
 
-    @GetMapping("/all")
+    @GetMapping
     public ResponseEntity<String> getAll() {
         try {
             return restTemplate.getForEntity(HTTPS_RESTCOUNTRIES_COM_V_3_1 + ALL, String.class);
@@ -26,7 +26,7 @@ public class CountryController {
         }
     }
 
-    @GetMapping("/name/{name}")
+    @GetMapping("/{name}")
     public ResponseEntity<String> getCountryData(@PathVariable String name) {
         try {
             return restTemplate.getForEntity(HTTPS_RESTCOUNTRIES_COM_V_3_1 + NAME + name, String.class);
